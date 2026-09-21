@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1A1A2E">
 <title>API Finder Pro Max</title>
 <style>
@@ -13,7 +13,6 @@ body {
   min-height: 100vh;
   color: #fff;
   padding: 15px;
-  overflow-x: hidden;
 }
 .header { text-align: center; margin-bottom: 20px; }
 .header h1 {
@@ -73,7 +72,6 @@ body {
   font-weight: bold;
   white-space: nowrap;
   cursor: pointer;
-  transition: 0.2s;
 }
 .method-btn.active {
   background: linear-gradient(135deg, #00D2FF, #3A7BD5);
@@ -107,26 +105,7 @@ body {
 .circle-red { background: linear-gradient(135deg, #FF4757, #c0392b); }
 .circle-green { background: linear-gradient(135deg, #00FF88, #00b36b); }
 .circle-pink { background: linear-gradient(135deg, #FF6B9D, #c44569); }
-.circle-blue { background: linear-gradient(135deg, #3A7BD5, #2c5aa0); }
 .circle-btn span { font-size: 11px; color: #ccc; }
-.tabs {
-  display: flex;
-  justify-content: space-around;
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px;
-  padding: 8px;
-  margin-bottom: 12px;
-}
-.tabs button {
-  background: transparent;
-  border: none;
-  color: #888;
-  font-size: 11px;
-  padding: 6px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.tabs button.active { color: #00D2FF; background: rgba(0,210,255,0.1); }
 .info-cards {
   display: flex;
   gap: 8px;
@@ -190,16 +169,6 @@ body {
   color: #555;
   margin-top: 15px;
 }
-.help-box {
-  background: rgba(0,210,255,0.08);
-  border: 1px solid rgba(0,210,255,0.2);
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 12px;
-  font-size: 11px;
-  color: #88c9e8;
-  line-height: 1.7;
-}
 </style>
 </head>
 <body>
@@ -207,11 +176,6 @@ body {
 <div class="header">
   <h1>⚡ API Finder Pro Max</h1>
   <p>کاوشگر حرفه‌ای API + JSON</p>
-</div>
-
-<div class="help-box">
-  💡 <b>راهنما:</b> آدرس API رو وارد کن، متد رو انتخاب کن، دکمه فعال‌سازی رو بزن.<br>
-  🔍 اگه می‌خوای متدهای واقعی سایت رو کشف کنی، دکمه «کشف متد» رو بزن.
 </div>
 
 <div class="input-box">
@@ -232,18 +196,18 @@ body {
     <div class="circle circle-red">▶</div>
     <span>فعال سازی</span>
   </div>
-  <div class="circle-btn" onclick="discoverMethods()">
-    <div class="circle circle-blue">🔍</div>
-    <span>کشف متد</span>
+  <div class="circle-btn" onclick="testDemo()">
+    <div class="circle circle-green">🧪</div>
+    <span>تست</span>
   </div>
-  <div class="circle-btn" onclick="showDemo()">
-    <div class="circle circle-pink">📡</div>
-    <span>نمونه</span>
+  <div class="circle-btn" onclick="showHelp()">
+    <div class="circle circle-pink">❓</div>
+    <span>راهنما</span>
   </div>
 </div>
 
 <div class="info-cards" id="infoCards">
-  <div class="info-card" id="methodCard">
+  <div class="info-card">
     <div class="label">متد</div>
     <div class="value" id="methodValue">-</div>
   </div>
@@ -260,12 +224,6 @@ body {
 <div class="loading" id="loading">
   <div class="spinner"></div>
   <p style="margin-top:10px; color:#00D2FF; font-size:12px;" id="loadingText">در حال دریافت...</p>
-</div>
-
-<div class="tabs" id="tabs" style="display:none;">
-  <button class="active" onclick="renderView('decoded', this)">رمزگشایی شده</button>
-  <button onclick="renderView('raw', this)">خام</button>
-  <button onclick="renderView('headers', this)">هدرها</button>
 </div>
 
 <div class="output" id="output">
@@ -288,26 +246,40 @@ document.querySelectorAll('.method-btn').forEach(btn => {
   });
 });
 
-// لیست پروکسی‌ها برای fallback
+// ============ لیست پروکسی‌های معتبر ============
+// ترتیب: سریع‌ترین و پایدارترین اول
 const PROXIES = [
-  (url) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
   (url) => 'https://corsproxy.io/?' + encodeURIComponent(url),
-  (url) => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url),
+  (url) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
+  (url) => 'https://thingproxy.freeboard.io/fetch/' + url,
+  (url) => 'https://cors-anywhere.herokuapp.com/' + url,
 ];
 
-// تلاش با چند پروکسی
 async function fetchWithFallback(url) {
   let lastError = null;
   for (let i = 0; i < PROXIES.length; i++) {
     try {
-      document.getElementById('loadingText').textContent = 'تلاش ' + (i+1) + ' از ' + PROXIES.length + '...';
+      document.getElementById('loadingText').textContent = 
+        'تلاش ' + (i+1) + ' از ' + PROXIES.length + '...';
+      
       const proxyUrl = PROXIES[i](url);
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 15000);
-      const response = await fetch(proxyUrl, { signal: controller.signal });
+      const timeout = setTimeout(() => controller.abort(), 12000);
+      
+      const response = await fetch(proxyUrl, { 
+        signal: controller.signal,
+        method: 'GET',
+        headers: { 'Accept': 'application/json, text/plain, */*' }
+      });
+      
       clearTimeout(timeout);
-      if (response.ok || response.status < 500) return response;
+      
+      // اگه خطای شبکه نبود، برمی‌گردونیم
+      if (response.status < 500) {
+        return response;
+      }
     } catch (e) {
+      console.log('پروکسی ' + (i+1) + ' ناموفق:', e.message);
       lastError = e;
       continue;
     }
@@ -315,20 +287,18 @@ async function fetchWithFallback(url) {
   throw lastError || new Error('همه پروکسی‌ها ناموفق بودند');
 }
 
-// دریافت API
+// ============ دریافت API ============
 async function fetchApi() {
   const url = document.getElementById('urlInput').value.trim();
-  if (!url) { alert('لطفا آدرس را وارد کنید'); return; }
+  if (!url) { alert('لطفا آدرس را وارد کن'); return; }
   if (!url.startsWith('http')) { alert('آدرس باید با http یا https شروع شود'); return; }
 
   const loading = document.getElementById('loading');
   const output = document.getElementById('output');
   const infoCards = document.getElementById('infoCards');
-  const tabs = document.getElementById('tabs');
 
   loading.classList.add('show');
   infoCards.classList.remove('show');
-  tabs.style.display = 'none';
   output.innerHTML = '<span style="color:#555;">در حال دریافت...</span>';
 
   const startTime = performance.now();
@@ -344,7 +314,6 @@ async function fetchApi() {
 
     loading.classList.remove('show');
     infoCards.classList.add('show');
-    tabs.style.display = 'flex';
 
     document.getElementById('methodValue').textContent = selectedMethod;
     const statusCard = document.getElementById('statusCard');
@@ -353,92 +322,80 @@ async function fetchApi() {
     document.getElementById('timeValue').textContent = responseTime + 'ms';
 
     decodedData = decodeResponse(rawText, headersData['content-type'] || '');
-    renderView('decoded', document.querySelector('.tabs button'));
+    renderOutput();
 
   } catch (error) {
     loading.classList.remove('show');
-    output.innerHTML = '<span style="color:#FF4757;">❌ خطا: ' + escapeHtml(error.message) + '\n\n💡 راه‌حل‌ها:\n1. اتصال اینترنتت رو چک کن\n2. یه API دیگه امتحان کن\n3. دکمه «کشف متد» رو بزن</span>';
+    output.innerHTML = 
+      '<span style="color:#FF4757;">❌ خطا: ' + escapeHtml(error.message) + '\n\n' +
+      '💡 راه‌حل‌ها:\n' +
+      '1. اتصال اینترنتت رو چک کن\n' +
+      '2. یه API دیگه امتحان کن (دکمه «تست» رو بزن)\n' +
+      '3. VPN رو روشن/خاموش کن\n' +
+      '4. چند دقیقه بعد دوباره امتحان کن</span>';
   }
 }
 
-// ============ کشف متدهای واقعی سایت ============
-async function discoverMethods() {
-  const url = document.getElementById('urlInput').value.trim();
-  if (!url || !url.startsWith('http')) { alert('لطفا آدرس معتبر وارد کن'); return; }
-
-  const loading = document.getElementById('loading');
+// ============ تست خودکار ============
+async function testDemo() {
+  const demos = [
+    'https://jsonplaceholder.typicode.com/posts/1',
+    'https://api.github.com/users/github',
+    'https://dog.ceo/api/breeds/image/random',
+  ];
+  
   const output = document.getElementById('output');
+  let html = '<span style="color:#00D2FF;">🧪 در حال تست پروکسی‌ها...\n\n</span>';
+  output.innerHTML = html;
+  document.getElementById('loading').classList.add('show');
 
-  loading.classList.add('show');
-  document.getElementById('loadingText').textContent = 'در حال کشف متدهای سایت...';
-  output.innerHTML = '<span style="color:#00D2FF;">🔍 در حال تست متدهای مختلف روی سایت مقصد...\n\n</span>';
-
-  const methods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'];
-  const results = [];
-
-  for (const method of methods) {
+  for (let i = 0; i < demos.length; i++) {
     try {
-      const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 8000);
-
-      const response = await fetch(proxyUrl, {
-        method: 'GET',
-        signal: controller.signal
-      });
-      clearTimeout(timeout);
-
-      // شبیه‌سازی با هدر درخواست
-      const acceptHeader = response.headers.get('allow') || response.headers.get('access-control-allow-methods') || '';
-      results.push({
-        method: method,
-        supported: acceptHeader.toUpperCase().includes(method) || method === 'GET',
-        status: response.status,
-        allow: acceptHeader
-      });
+      document.getElementById('loadingText').textContent = 'تست API ' + (i+1) + '...';
+      const start = performance.now();
+      const response = await fetchWithFallback(demos[i]);
+      const end = performance.now();
+      const text = await response.text();
+      
+      html += '<span style="color:#00FF88;">✅ ' + demos[i] + '\n';
+      html += '   وضعیت: ' + response.status + ' | زمان: ' + Math.round(end-start) + 'ms</span>\n\n';
     } catch (e) {
-      results.push({ method, supported: false, status: 'error', error: e.message });
+      html += '<span style="color:#FF4757;">❌ ' + demos[i] + '\n';
+      html += '   خطا: ' + e.message + '</span>\n\n';
     }
+    output.innerHTML = html;
   }
 
-  loading.classList.remove('show');
-
-  let html = '<span style="color:#00FF88; font-size:14px;">✅ نتایج کشف متد:\n\n</span>';
-  results.forEach(r => {
-    const icon = r.supported ? '✅' : '❌';
-    const color = r.supported ? '#00FF88' : '#FF4757';
-    html += '<span style="color:' + color + ';">' + icon + ' ' + r.method + '</span>';
-    if (r.allow) html += ' <span style="color:#888;">→ Allow: ' + r.allow + '</span>';
-    if (r.status === 'error') html += ' <span style="color:#888;">(خطا)</span>';
-    html += '\n';
-  });
-
-  html += '\n<span style="color:#FFA502;">💡 نکته: مرورگر فقط می‌تونه متد GET رو مستقیماً تست کنه.\nبرای دیدن متدهای واقعی، از تب Network مرورگر (F12) استفاده کن.</span>';
-
+  document.getElementById('loading').classList.remove('show');
+  html += '<span style="color:#FFA502;">\n💡 اگه همه تست‌ها موفق بودن، یعنی اینترنت و پروکسی‌ها OK هستن.</span>';
   output.innerHTML = html;
 }
 
-// ============ نمونه‌های آماده ============
-function showDemo() {
-  const demos = [
-    { url: 'https://jsonplaceholder.typicode.com/posts/1', name: 'پست نمونه' },
-    { url: 'https://jsonplaceholder.typicode.com/users', name: 'لیست کاربران' },
-    { url: 'https://api.github.com/users/github', name: 'کاربر گیت‌هاب' },
-    { url: 'https://dog.ceo/api/breeds/image/random', name: 'عکس سگ تصادفی' },
-    { url: 'https://api.coindesk.com/v1/bpi/currentprice.json', name: 'قیمت بیت‌کوین' },
-  ];
+// ============ راهنما ============
+function showHelp() {
+  const output = document.getElementById('output');
+  output.innerHTML = `<span style="color:#00D2FF; font-size:14px;">📖 راهنما\n\n</span>
+<span style="color:#00FF88;">1.</span> آدرس API رو توی کادر بالا وارد کن
+   مثال: https://jsonplaceholder.typicode.com/posts/1
 
-  let msg = 'یه نمونه انتخاب کن:\n\n';
-  demos.forEach((d, i) => msg += (i+1) + '. ' + d.name + '\n');
+<span style="color:#00FF88;">2.</span> متد رو انتخاب کن (GET, POST, ...)
 
-  const choice = prompt(msg + '\nعدد رو وارد کن (1-' + demos.length + '):');
-  if (choice) {
-    const idx = parseInt(choice) - 1;
-    if (idx >= 0 && idx < demos.length) {
-      document.getElementById('urlInput').value = demos[idx].url;
-      fetchApi();
-    }
-  }
+<span style="color:#00FF88;">3.</span> دکمه <span style="color:#FF4757;">▶ فعال سازی</span> رو بزن
+
+<span style="color:#00FF88;">4.</span> نتیجه به صورت خودکار رمزگشایی می‌شه
+
+<span style="color:#FFA502;">🔓 رمزگشایی‌های پشتیبانی شده:</span>
+   • JSON (مرتب و رنگی)
+   • Base64
+   • URL Encoding
+   • HTML (تبدیل به متن)
+
+<span style="color:#FFA502;">💡 نکته:</span> اگه خطا دیدی، دکمه «تست» رو بزن تا ببینی مشکل از چیه.
+
+<span style="color:#FFA502;">📌 اگه همه پروکسی‌ها خطا دادن:</span>
+   • اینترنتت رو چک کن
+   • VPN رو روشن کن
+   • یا چند دقیقه بعد امتحان کن`;
 }
 
 // ============ رمزگشایی ============
@@ -479,29 +436,14 @@ function decodeResponse(text, contentType) {
   return { type: 'text', text: text };
 }
 
-function renderView(view, btn) {
-  if (btn) {
-    document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
+function renderOutput() {
   const output = document.getElementById('output');
-
-  if (view === 'decoded') {
-    if (decodedData && decodedData.data) {
-      output.innerHTML = syntaxHighlight(decodedData.data);
-    } else if (decodedData && decodedData.text) {
-      output.innerHTML = '<span style="color:#00FF88;">' + escapeHtml(decodedData.text) + '</span>';
-    } else {
-      output.innerHTML = '<span style="color:#555;">داده‌ای نیست</span>';
-    }
-  } else if (view === 'raw') {
-    output.innerHTML = escapeHtml(rawText);
-  } else if (view === 'headers') {
-    let html = '';
-    for (let k in headersData) {
-      html += '<span class="key">' + escapeHtml(k) + '</span>: <span class="string">' + escapeHtml(headersData[k]) + '</span>\n';
-    }
-    output.innerHTML = html || 'هدری یافت نشد';
+  if (decodedData && decodedData.data) {
+    output.innerHTML = syntaxHighlight(decodedData.data);
+  } else if (decodedData && decodedData.text) {
+    output.innerHTML = '<span style="color:#00FF88;">' + escapeHtml(decodedData.text) + '</span>';
+  } else {
+    output.innerHTML = '<span style="color:#555;">داده‌ای نیست</span>';
   }
 }
 
